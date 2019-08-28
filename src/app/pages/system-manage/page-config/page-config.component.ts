@@ -41,6 +41,10 @@ export class PageConfigComponent implements OnInit {
         title: '界面名称',
         type: 'string',
       },
+      medium: {
+        title: '界面描述',
+        type: 'string',
+      },
       type: {
         title: '界面类型',
         type: 'string',

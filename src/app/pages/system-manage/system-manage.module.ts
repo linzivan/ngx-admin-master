@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
+import {ReactiveFormsModule} from "@angular/forms";
 import { CommonModule } from '@angular/common';
 
 import { SystemManageRoutingModule } from './system-manage-routing.module';
 import { PageConfigComponent } from './page-config/page-config.component';
 import {
   NbAlertModule,
-  NbCardModule,
+  NbCardModule, NbCheckboxModule,
   NbIconModule,
   NbInputModule,
-  NbPopoverModule,
+  NbPopoverModule, NbRadioModule,
   NbSearchModule,
   NbTreeGridModule,
 } from '@nebular/theme';
@@ -42,9 +43,12 @@ const components = [
     NbSearchModule,
     NbAlertModule,
     ThemeModule,
+    NbRadioModule,
+    NbCheckboxModule,
     CommonModule,
     Ng2SmartTableModule,
     SystemManageRoutingModule,
+    ReactiveFormsModule,
   ],
 })
 export class SystemManageModule { }

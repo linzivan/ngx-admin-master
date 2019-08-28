@@ -1,3 +1,43 @@
-<p>
-  page-params works!
-</p>
+  <nb-card>
+      <nb-card-header>页面参数配置</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+          <div class="form-group row">
+            <label  class="label col-sm-3 col-form-label">页面名称</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput  placeholder="页面名称" formControlName="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="label col-sm-3 col-form-label">页面描述</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput placeholder="页面描述" formControlName="menu_desc">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="label col-sm-3 col-form-label">页面URL(相对地址)</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput placeholder="页面URL" formControlName="redirecturl">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="label col-sm-3 col-form-label">图片URL</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput placeholder="图片URL" formControlName="image_url">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 label">显示</label>
+            <div class="demo-items">
+              <nb-checkbox formControlName="showdesktop">桌面显示</nb-checkbox>
+              <nb-checkbox [value]="true" formControlName="showmobile">移动显示</nb-checkbox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9">
+              <button type="submit" nbButton status="primary">提交</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
