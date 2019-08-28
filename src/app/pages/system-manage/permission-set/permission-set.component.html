@@ -1,0 +1,36 @@
+
+<div class="container-fluid"  style="width: 1500px; text-align: left;">
+
+    <div style="width: 600px; display: inline-block; float: left;">
+      <nb-card>
+        <nb-card-header>
+
+          <a routerLink="/pages/system-manage/page-config" style="float: right">
+            <nb-icon [icon]="evaIcons[6]" pack="eva"></nb-icon>回退
+          </a>
+
+          权限分配
+        </nb-card-header>
+
+        <nb-card-body>
+          <ng2-smart-table [settings]="permission_settings" [source]="permission_source" (deleteConfirm)="permissionDeleteEvent($event)">
+          </ng2-smart-table>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+
+    <div  style="width: 500px; display: inline-block; float: left; margin-left: 10px">
+      <nb-card>
+        <nb-card-header>
+          角色列表
+        </nb-card-header>
+        <nb-card-body>
+          <ng2-smart-table [settings]="role_list_settings" [source]="role_list_source" (deleteConfirm)="roleAddEvent($event)">
+          </ng2-smart-table>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+
+</div>
