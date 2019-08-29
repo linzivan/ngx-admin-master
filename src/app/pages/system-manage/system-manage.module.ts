@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { SystemManageRoutingModule } from './system-manage-routing.module';
 import { PageConfigComponent } from './page-config/page-config.component';
 import {
-  NbAlertModule,
-  NbCardModule, NbCheckboxModule,
+  NbActionsModule,
+  NbAlertModule, NbButtonModule,
+  NbCardModule, NbCheckboxModule, NbDatepickerModule,
   NbIconModule,
   NbInputModule,
   NbPopoverModule, NbRadioModule,
-  NbSearchModule,
-  NbTreeGridModule,
+  NbSearchModule, NbSelectModule,
+  NbTreeGridModule, NbUserModule,
 } from '@nebular/theme';
 import {ThemeModule} from '../../@theme/theme.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
@@ -42,6 +43,11 @@ const components = [
     NbPopoverModule,
     NbSearchModule,
     NbAlertModule,
+    NbButtonModule,
+    NbActionsModule,
+    NbUserModule,
+    NbSelectModule,
+    NbDatepickerModule,
     ThemeModule,
     NbRadioModule,
     NbCheckboxModule,

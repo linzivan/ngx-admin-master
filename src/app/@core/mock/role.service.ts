@@ -1,51 +1,33 @@
 import { Injectable } from '@angular/core';
-import {PageConfigData} from '../data/page-config';
+import {RoleData} from "../data/role";
 
 @Injectable()
-export class PageConfigService extends PageConfigData {
+export class RoleDataService extends RoleData {
 
   data = [{
-    name: '系统管理',
-    type: '导航栏',
-    showmobile: '否',
-    active: '是',
-    lastupdateon: '2019-08-28',
-    lastupdatedby: 'admin',
+    role: '操作员',
+    medium: '操作员',
+    lastupdateon: '2018-01-01',
   }, {
-    name: '界面1',
-    type: '界面',
-    showmobile: '否',
-    active: '是',
-    lastupdateon: '2019-08-28',
-    lastupdatedby: 'admin',
+    role: '中转员',
+    medium: '中转员',
+    lastupdateon: '2018-01-01',
   }, {
-    name: '界面2',
-    type: '界面',
-    showmobile: '是',
-    active: '是',
-    lastupdateon: '2019-08-28',
-    lastupdatedby: 'admin',
+    role: '工艺师',
+    medium: '工艺师',
+    lastupdateon: '2018-01-01',
   }, {
-    name: '界面3',
-    type: '界面',
-    showmobile: '是',
-    active: '是',
-    lastupdateon: '2019-08-28',
-    lastupdatedby: 'admin',
+    role: '资料员',
+    medium: '资料员',
+    lastupdateon: '2018-01-01',
   }, {
-    name: '界面4',
-    type: '界面',
-    showmobile: '否',
-    active: '是',
-    lastupdateon: '2019-07-28',
-    lastupdatedby: 'admin',
+    role: 'Security guard',
+    medium: '安全保密员',
+    lastupdateon: '2018-01-01',
   }, {
-    name: '界面5',
-    type: '界面',
-    showmobile: '是',
-    active: '是',
-    lastupdateon: '2019-05-28',
-    lastupdatedby: 'mabo',
+    role: '工时定额员',
+    medium: '工时定额员',
+    lastupdateon: '2018-01-01',
   }];
 
   getData() {

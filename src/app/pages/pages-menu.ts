@@ -17,6 +17,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
+    title: '系统管理',
+    icon: 'browser-outline',
+    children: [
+      {
+        title: '页面配置',
+        link: '/pages/system-manage/page-config',
+      },
+    ],
+  },
+  {
     title: 'Layout',
     icon: 'layout-outline',
     children: [

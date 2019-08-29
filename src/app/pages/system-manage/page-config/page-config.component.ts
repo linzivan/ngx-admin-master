@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {PageConfigData} from '../../../@core/data/page-config';
 import {Router} from '@angular/router';
+import {NbComponentStatus} from "@nebular/theme";
 
 @Component({
   selector: 'ngx-page-config',
@@ -9,6 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./page-config.component.scss'],
 })
 export class PageConfigComponent implements OnInit {
+  statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
   ngOnInit() {
   }
   settings = {
@@ -41,7 +43,7 @@ export class PageConfigComponent implements OnInit {
         title: '界面名称',
         type: 'string',
       },
-      medium: {
+      menu_desc: {
         title: '界面描述',
         type: 'string',
       },
@@ -52,10 +54,22 @@ export class PageConfigComponent implements OnInit {
       showmobile: {
         title: '移动显示',
         type: 'string',
+        valuePrepareFunction: (cell, row ) => {
+          if (cell) {
+            return '是';
+          }
+          return '否';
+         },
       },
       active: {
-        title: '界面显示',
+        title: '是否显示',
         type: 'string',
+        valuePrepareFunction: (cell, row ) => {
+          if (cell) {
+            return '是';
+          }
+          return '否';
+         },
       },
       lastupdateon: {
         title: '修改时间',
@@ -77,6 +91,11 @@ export class PageConfigComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
+    localStorage.setItem('current_menu', JSON.stringify(event.data));
     this.route.navigate(['/pages/system-manage/permission-set']);
+  }
+  add_menu() {
+    localStorage.removeItem('current_menu');
+    this.route.navigate(['/pages/system-manage/page-params']);
   }
 }

@@ -1,6 +1,10 @@
 <nb-card>
+
   <nb-card-header>
-    页面配置
+    页面列表
+    <a (click)="add_menu()" nbButton [status]="statuses[2]" ghost style="float: right">
+        +添加
+    </a>
   </nb-card-header>
 
   <nb-card-body>

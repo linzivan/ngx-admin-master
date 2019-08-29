@@ -1,23 +1,39 @@
-  <nb-card>
+  <button disabled nbButton ghost>
+    页面参数
+  </button>
+  <a  nbButton [status]="statuses[2]" ghost routerLink="/pages/system-manage/permission-set">
+              权限配置
+  </a>
+  <a routerLink="/pages/system-manage/page-config" nbButton [status]="statuses[2]" ghost style="float: right">
+    <nb-icon [icon]="evaIcons[6]" pack="eva"></nb-icon>页面列表
+  </a>
+
+<nb-card>
       <nb-card-header>页面参数配置</nb-card-header>
       <nb-card-body>
         <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
           <div class="form-group row">
             <label  class="label col-sm-3 col-form-label">页面名称</label>
             <div class="col-sm-9">
-              <input type="text" nbInput  placeholder="页面名称" formControlName="name">
+              <input type="text" nbInput  placeholder="页面名称(必填)" formControlName="name" required>
             </div>
           </div>
           <div class="form-group row">
             <label class="label col-sm-3 col-form-label">页面描述</label>
             <div class="col-sm-9">
-              <input type="text" nbInput placeholder="页面描述" formControlName="menu_desc">
+              <input type="text" nbInput placeholder="页面描述(必填)" formControlName="menu_desc">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="label col-sm-3 col-form-label">页面类型</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput placeholder="页面类型(必填)" formControlName="type">
             </div>
           </div>
           <div class="form-group row">
             <label class="label col-sm-3 col-form-label">页面URL(相对地址)</label>
             <div class="col-sm-9">
-              <input type="text" nbInput placeholder="页面URL" formControlName="redirecturl">
+              <input type="text" nbInput placeholder="页面URL(必填)" formControlName="redirecturl">
             </div>
           </div>
           <div class="form-group row">
@@ -31,11 +47,15 @@
             <div class="demo-items">
               <nb-checkbox formControlName="showdesktop">桌面显示</nb-checkbox>
               <nb-checkbox [value]="true" formControlName="showmobile">移动显示</nb-checkbox>
+              <nb-checkbox [value]="true" formControlName="active">是否显示</nb-checkbox>
             </div>
           </div>
           <div class="form-group row">
             <div class="offset-sm-3 col-sm-9">
-              <button type="submit" nbButton status="primary">提交</button>
+              <button type="submit" nbButton status="primary"
+                      [disabled]="checkoutForm.value.name && checkoutForm.value.menu_desc && checkoutForm.value.type && checkoutForm.value.redirecturl">
+                提交
+              </button>
             </div>
           </div>
         </form>

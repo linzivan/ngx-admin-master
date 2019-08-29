@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {RoleData} from "../../../@core/data/role";
 import {RoleListData} from "../../../@core/data/role_list";
-import {NbIconLibraries} from "@nebular/theme";
+import {NbComponentStatus, NbIconLibraries} from "@nebular/theme";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-permission-set',
@@ -10,6 +11,7 @@ import {NbIconLibraries} from "@nebular/theme";
   styleUrls: ['./permission-set.component.scss'],
 })
 export class PermissionSetComponent implements OnInit {
+  statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
   current_page_roles = [];
   current_roles = [];
   evaIcons = [];
@@ -66,7 +68,8 @@ export class PermissionSetComponent implements OnInit {
   };
   constructor(private RoleDataService: RoleData,
               private RoleListDataService: RoleListData,
-              iconsLibrary: NbIconLibraries) {
+              iconsLibrary: NbIconLibraries,
+              private route: Router) {
 
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
       .filter(icon => icon.indexOf('outline') === -1);
@@ -126,6 +129,13 @@ export class PermissionSetComponent implements OnInit {
     this.role_list_source.load(this.current_roles);
   }
   loadData() {
+    const current_menu = JSON.parse(localStorage.getItem('current_menu'));
+    if (!current_menu) {
+      this.route.navigate(['/pages/system-manage/page-config']);
+      return;
+    }
+    const menuId = current_menu.id;
+    // TODO: 通过menuId去查 该menu下的role
     const page_roles = this.RoleDataService.getData();
     const all_role_list = this.RoleListDataService.getData();
     let role_list = [];

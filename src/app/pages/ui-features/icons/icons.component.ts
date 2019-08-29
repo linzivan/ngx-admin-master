@@ -49,5 +49,4 @@ export class IconsComponent {
 
     fontAwesomeRegular: [ 'chart-bar', 'bell', 'bell-slash', 'bookmark', 'building' ],
   };
-
 }

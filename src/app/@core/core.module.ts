@@ -51,6 +51,12 @@ import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
+import {PageConfigData} from './data/page-config';
+import {PageConfigService} from './mock/page-config.service';
+import {RoleDataService} from './mock/role.service';
+import {RoleData} from './data/role';
+import {RoleListData} from "./data/role_list";
+import {RoleListDataService} from "./mock/role_list.service";
 
 const socialLinks = [
   {
@@ -74,6 +80,9 @@ const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide: ElectricityData, useClass: ElectricityService },
   { provide: SmartTableData, useClass: SmartTableService },
+  { provide: PageConfigData, useClass: PageConfigService },
+  { provide: RoleData, useClass: RoleDataService },
+  { provide: RoleListData, useClass: RoleListDataService },
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
   { provide: ProfitChartData, useClass: ProfitChartService },

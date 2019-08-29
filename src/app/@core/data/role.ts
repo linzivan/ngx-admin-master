@@ -1,4 +1,4 @@
 
-export abstract class PageConfigData {
+export abstract class RoleData {
   abstract getData(): any[];
 }

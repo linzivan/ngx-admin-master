@@ -1,4 +1,4 @@
 
-export abstract class RoleData {
+export abstract class RoleListData {
   abstract getData(): any[];
 }
