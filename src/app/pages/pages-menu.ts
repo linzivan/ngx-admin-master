@@ -22,7 +22,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '页面配置',
-        link: '/pages/system-manage/page-config',
+        link: '/pages/system-manage/menu-config',
       },
     ],
   },

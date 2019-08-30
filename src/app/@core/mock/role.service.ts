@@ -30,7 +30,25 @@ export class RoleDataService extends RoleData {
     lastupdateon: '2018-01-01',
   }];
 
-  getData() {
-    return this.data;
+  data1 = [{
+    role: '操作员',
+    medium: '操作员',
+    lastupdateon: '2018-01-01',
+  }, {
+    role: '中转员',
+    medium: '中转员',
+    lastupdateon: '2018-01-01',
+  }, {
+    role: '工艺师',
+    medium: '工艺师',
+    lastupdateon: '2018-01-01',
+  }];
+
+  getData(id) {
+    if (id % 2 === 0) {
+          return this.data;
+    }    else {
+      return this.data1;
+    }
   }
 }

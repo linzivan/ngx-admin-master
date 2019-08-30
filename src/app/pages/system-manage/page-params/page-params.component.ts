@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {NbComponentStatus, NbIconLibraries} from "@nebular/theme";
 import {Router} from "@angular/router";
@@ -8,13 +8,12 @@ import {Router} from "@angular/router";
   templateUrl: './page-params.component.html',
   styleUrls: ['./page-params.component.scss'],
 })
-export class PageParamsComponent implements OnInit {
+export class PageParamsComponent implements OnInit, OnChanges {
+  @Input() menuItem;
   checkoutForm;
   item;
   evaIcons;
   statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
-  // //
-  // //
   constructor(private formBuilder: FormBuilder,
               iconsLibrary: NbIconLibraries,
               private route: Router) {
@@ -29,29 +28,23 @@ export class PageParamsComponent implements OnInit {
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
     const current_menu = JSON.parse(localStorage.getItem('current_menu'));
     /*
-    * * 响应式表单
-    * *
-    * */
-    this.checkoutForm = this.formBuilder.group({
+    * *{
       name: '',
       menu_desc: '',
-      type: '',
+      menu_type: '',
       redirecturl: '',
       image_url: '',
       showdesktop: true,
       showmobile: false,
       active: true,
-    });
+    }
+    * */
   }
 
   ngOnInit() {
-    this.get_current_menu_info();
   }
-  get_current_menu_info() {
-    const current_menu = JSON.parse(localStorage.getItem('current_menu'));
-    if (current_menu) {
-      this.checkoutForm = this.formBuilder.group(current_menu);
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.checkoutForm = this.formBuilder.group(changes.menuItem.currentValue);
   }
   onSubmit(customerData) {
     // Process checkout data here
@@ -59,6 +52,6 @@ export class PageParamsComponent implements OnInit {
     // this.items = this.cartService.clearCart();
     this.checkoutForm.reset();
     // TODO: 提交数据
-    this.route.navigate(['/pages/system-manage/page-config']);
+    // this.route.navigate(['/pages/system-manage/page-config']);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {RoleData} from "../../../@core/data/role";
 import {RoleListData} from "../../../@core/data/role_list";
@@ -10,8 +10,9 @@ import {Router} from "@angular/router";
   templateUrl: './permission-set.component.html',
   styleUrls: ['./permission-set.component.scss'],
 })
-export class PermissionSetComponent implements OnInit {
+export class PermissionSetComponent implements OnInit , OnChanges {
   statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
+  @Input() menuItem;
   current_page_roles = [];
   current_roles = [];
   evaIcons = [];
@@ -124,20 +125,20 @@ export class PermissionSetComponent implements OnInit {
   ngOnInit() {
     this.loadData();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.menuItem = changes.menuItem.currentValue;
+    this.loadData();
+  }
   refreshData() {
+    // 更新两张表的数据
     this.permission_source.load(this.current_page_roles);
     this.role_list_source.load(this.current_roles);
   }
   loadData() {
-    const current_menu = JSON.parse(localStorage.getItem('current_menu'));
-    if (!current_menu) {
-      this.route.navigate(['/pages/system-manage/page-config']);
-      return;
-    }
-    const menuId = current_menu.id;
+    const current_menu_id = this.menuItem.id;
     // TODO: 通过menuId去查 该menu下的role
-    const page_roles = this.RoleDataService.getData();
-    const all_role_list = this.RoleListDataService.getData();
+    const page_roles = this.RoleDataService.getData(current_menu_id); // 该页面目前的权限
+    const all_role_list = this.RoleListDataService.getData(); // 所有权限
     let role_list = [];
     // 首先去除已选择的员工role
     for (let role of all_role_list) {

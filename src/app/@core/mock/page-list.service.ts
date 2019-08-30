@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {PageConfigData} from '../data/page-config';
+import {PageListData} from '../data/page-list';
 
 @Injectable()
-export class PageConfigService extends PageConfigData {
+export class PageListService extends PageListData {
 
   data = [{
     id: 1,

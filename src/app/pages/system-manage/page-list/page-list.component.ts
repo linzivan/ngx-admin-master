@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
-import {PageConfigData} from '../../../@core/data/page-config';
+import {PageListData} from '../../../@core/data/page-list';
 import {Router} from '@angular/router';
 import {NbComponentStatus} from "@nebular/theme";
 
 @Component({
-  selector: 'ngx-page-config',
-  templateUrl: './page-config.component.html',
-  styleUrls: ['./page-config.component.scss'],
+  selector: 'ngx-page-list',
+  templateUrl: './page-list.component.html',
+  styleUrls: ['./page-list.component.scss'],
 })
-export class PageConfigComponent implements OnInit {
+export class PageListComponent implements OnInit {
   statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
   ngOnInit() {
   }
@@ -84,7 +84,7 @@ export class PageConfigComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: PageConfigData,
+  constructor(private service: PageListData,
               private route: Router) {
     const data = this.service.getData();
     this.source.load(data);
