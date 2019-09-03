@@ -7,7 +7,7 @@ import { PageListComponent } from './page-list/page-list.component';
 import {
   NbActionsModule,
   NbAlertModule, NbButtonModule,
-  NbCardModule, NbCheckboxModule, NbDatepickerModule,
+  NbCardModule, NbCheckboxModule, NbDatepickerModule, NbDialogModule,
   NbIconModule,
   NbInputModule,
   NbPopoverModule, NbRadioModule,
@@ -21,6 +21,7 @@ import { PageParamsComponent } from './page-params/page-params.component';
 import {TreeModule} from "angular-tree-component";
 import {SystemManageComponent} from './system-manage.component';
 import { MenuConfigComponent } from './menu-config/menu-config.component';
+import { DialogAddmenuComponent } from './menu-config/dialog-addmenu/dialog-addmenu.component';
 
 const COMPONENTS = [
   PageListComponent,
@@ -28,6 +29,11 @@ const COMPONENTS = [
   PageParamsComponent,
   SystemManageComponent,
   MenuConfigComponent,
+  DialogAddmenuComponent,
+];
+
+const ENTRY_COMPONENTS = [
+  DialogAddmenuComponent,
 ];
 
 const IMPORTS = [
@@ -51,10 +57,12 @@ const IMPORTS = [
     SystemManageRoutingModule,
     ReactiveFormsModule,
     TreeModule,
+    NbDialogModule.forChild(),
 ];
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [...IMPORTS],
+  entryComponents: [DialogAddmenuComponent],
 })
 export class SystemManageModule { }

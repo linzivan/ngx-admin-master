@@ -1,34 +1,43 @@
-<div class="row">
-  <div class="col-md-1">
-    <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="addMenu()"></nb-icon>
-  </div>
-  <div class="col-md-1">
-    <nb-icon title="链接" [icon]="evaIcons[132]" pack="eva"></nb-icon>
-  </div>
-  <div class="col-md-1">
-    <nb-icon title="删除" [icon]="evaIcons[227]" pack="eva"></nb-icon>
-  </div>
-  <div class="col-md-1 offset-2" >
-    <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="buttonDisabled">配置</button>
-  </div>
-  <div class="col-md-1 offset-1">
-    <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="!buttonDisabled">权限</button>
-  </div>
+<div *ngIf="!showPageListFlag">
+      <div class="row">
+        <div class="col-md-1">
+          <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="open()"></nb-icon>
+        </div>
+        <div class="col-md-1">
+          <nb-icon title="链接" [icon]="evaIcons[132]" pack="eva" (click)="showPageListToggle()"></nb-icon>
+        </div>
+        <div class="col-md-1">
+          <nb-icon title="删除" [icon]="evaIcons[227]" pack="eva"></nb-icon>
+        </div>
+        <div class="col-md-1 offset-2" >
+          <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="buttonDisabled">配置</button>
+        </div>
+        <div class="col-md-1 offset-1">
+          <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="!buttonDisabled">权限</button>
+        </div>
 
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-3">
+          <nb-card>
+            <nb-card-header>菜单项 <i *ngIf="selectedMenu" style="color: red">{{selectedMenu.name}}</i></nb-card-header>
+            <nb-card-body>
+              <tree-root [nodes]="nodes" (focus)="selected($event)" [(state)]="stats"></tree-root>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-md-8" *ngIf="selectedMenu">
+          <ngx-page-params [menuItem]="selectedMenu" *ngIf="buttonDisabled"></ngx-page-params>
+          <ngx-permission-set [menuItem]="selectedMenu"  *ngIf="!buttonDisabled"></ngx-permission-set>
+        </div>
+      </div>
 </div>
 
-
-<div class="row">
-  <div class="col-md-3">
-    <nb-card>
-      <nb-card-header>菜单项</nb-card-header>
-      <nb-card-body>
-        <tree-root [nodes]="nodes" (focus)="selected($event)"></tree-root>
-      </nb-card-body>
-    </nb-card>
-  </div>
-  <div class="col-md-8" *ngIf="selectedMenu">
-    <ngx-page-params [menuItem]="selectedMenu" *ngIf="buttonDisabled"></ngx-page-params>
-    <ngx-permission-set [menuItem]="selectedMenu"  *ngIf="!buttonDisabled"></ngx-permission-set>
-  </div>
+<div  *ngIf="selectedMenu && showPageListFlag">
+  <i>菜单列表</i>
+  <button nbButton [size]="sizes[0]" (click)="showPageListToggle()" style="float: right">返回</button>
+  <ngx-page-list [menuItem]="selectedMenu"></ngx-page-list>
 </div>
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuListData} from "../../../@core/data/menu-list";
-import {NbComponentSize, NbComponentStatus, NbIconLibraries} from "@nebular/theme";
+import {NbComponentSize, NbComponentStatus, NbDialogService, NbIconLibraries} from "@nebular/theme";
+import {DialogAddmenuComponent} from "./dialog-addmenu/dialog-addmenu.component";
 
 @Component({
   selector: 'ngx-menu-config',
@@ -12,11 +13,13 @@ export class MenuConfigComponent implements OnInit {
   sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
   nodes; // TreeNodes
   selectedMenu; // 当前选中的菜单
+  stats;
   evaIcons; // 图标
-  addFlag = false;
   buttonDisabled = true;
+  showPageListFlag = false;
   constructor(iconsLibrary: NbIconLibraries,
-              private menuServer: MenuListData) {
+              private menuServer: MenuListData,
+              private dialogService: NbDialogService) {
     this.nodes = this.menuServer.getData();
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
       .filter(icon => icon.indexOf('outline') === -1);
@@ -33,7 +36,14 @@ export class MenuConfigComponent implements OnInit {
   toggle() {
     this.buttonDisabled = !this.buttonDisabled;
   }
-  addMenu() {
-    this.addFlag = true;
+  open() {
+    this.dialogService.open(DialogAddmenuComponent)
+      .onClose.subscribe(name => {
+    });
+  }
+  showPageListToggle() {
+    if (this.selectedMenu) {
+      this.showPageListFlag = !this.showPageListFlag;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {PageListData} from '../../../@core/data/page-list';
 import {Router} from '@angular/router';
@@ -9,9 +9,13 @@ import {NbComponentStatus} from "@nebular/theme";
   templateUrl: './page-list.component.html',
   styleUrls: ['./page-list.component.scss'],
 })
-export class PageListComponent implements OnInit {
+export class PageListComponent implements OnInit, OnChanges {
   statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
+  @Input() menuItem;
   ngOnInit() {
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.menuItem = changes.menuItem.currentValue;
   }
   settings = {
     actions: {
@@ -35,7 +39,7 @@ export class PageListComponent implements OnInit {
       cancelButtonContent: '<i class="nb-close"></i>',
     },
     delete: {
-      deleteButtonContent: '<font size="3" face="arial">配置</font>',
+      deleteButtonContent: '<font size="3" face="arial">选择</font>',
       confirmDelete: true,
     },
     columns: {
@@ -91,11 +95,7 @@ export class PageListComponent implements OnInit {
   }
 
   onDeleteConfirm(event): void {
-    localStorage.setItem('current_menu', JSON.stringify(event.data));
-    this.route.navigate(['/pages/system-manage/permission-set']);
-  }
-  add_menu() {
-    localStorage.removeItem('current_menu');
-    this.route.navigate(['/pages/system-manage/page-params']);
+    // localStorage.setItem('current_menu', JSON.stringify(event.data));
+    this.route.navigate(['/pages/system-manage/menu-config']);
   }
 }
