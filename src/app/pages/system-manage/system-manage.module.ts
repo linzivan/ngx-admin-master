@@ -22,6 +22,8 @@ import {TreeModule} from "angular-tree-component";
 import {SystemManageComponent} from './system-manage.component';
 import { MenuConfigComponent } from './menu-config/menu-config.component';
 import { DialogAddmenuComponent } from './menu-config/dialog-addmenu/dialog-addmenu.component';
+import {PageListTableSetings} from './page-list/pageList-tableConfig';
+import {MenuTreeService} from './service/menuTree-service';
 
 const COMPONENTS = [
   PageListComponent,
@@ -60,9 +62,15 @@ const IMPORTS = [
     NbDialogModule.forChild(),
 ];
 
+const PROVIDERS = [
+  PageListTableSetings,
+  MenuTreeService
+];
+
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [...IMPORTS],
-  entryComponents: [DialogAddmenuComponent],
+  entryComponents: [...ENTRY_COMPONENTS],
+  providers: [...PROVIDERS],
 })
 export class SystemManageModule { }

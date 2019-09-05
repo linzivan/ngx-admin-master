@@ -7,7 +7,7 @@
           <nb-icon title="链接" [icon]="evaIcons[132]" pack="eva" (click)="showPageListToggle()"></nb-icon>
         </div>
         <div class="col-md-1">
-          <nb-icon title="删除" [icon]="evaIcons[227]" pack="eva"></nb-icon>
+          <nb-icon title="删除" [icon]="evaIcons[227]" pack="eva" (click)="deleteMenu()"></nb-icon>
         </div>
         <div class="col-md-1 offset-2" >
           <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="buttonDisabled">配置</button>
@@ -24,7 +24,7 @@
           <nb-card>
             <nb-card-header>菜单项 <i *ngIf="selectedMenu" style="color: red">{{selectedMenu.name}}</i></nb-card-header>
             <nb-card-body>
-              <tree-root [nodes]="nodes" (focus)="selected($event)" [(state)]="stats"></tree-root>
+              <tree-root [nodes]="nodes"  (activate)="selected($event)" [(state)]="stats"></tree-root>
             </nb-card-body>
           </nb-card>
         </div>
@@ -38,6 +38,6 @@
 <div  *ngIf="selectedMenu && showPageListFlag">
   <i>菜单列表</i>
   <button nbButton [size]="sizes[0]" (click)="showPageListToggle()" style="float: right">返回</button>
-  <ngx-page-list [menuItem]="selectedMenu"></ngx-page-list>
+  <ngx-page-list (selectPage)="linkPage($event)" [menuItem]="selectedMenu"></ngx-page-list>
 </div>
 

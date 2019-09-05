@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>请输入菜单名称：</nb-card-header>
+  <nb-card-body>
+    <input #name nbInput placeholder="Name">
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">取消</button>
+    <button nbButton status="success" (click)="submit(name.value)">确认</button>
+  </nb-card-footer>
+</nb-card>

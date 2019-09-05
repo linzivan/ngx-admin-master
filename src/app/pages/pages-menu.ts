@@ -29,6 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Layout',
     icon: 'layout-outline',
+    hidden: true,
     children: [
       {
         title: 'Stepper',
@@ -56,6 +57,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Forms',
     icon: 'edit-2-outline',
+    hidden: true,
     children: [
       {
         title: 'Form Inputs',
@@ -78,6 +80,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'UI Features',
     icon: 'keypad-outline',
+    hidden: true,
     link: '/pages/ui-features',
     children: [
       {
@@ -101,6 +104,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Modal & Overlays',
     icon: 'browser-outline',
+    hidden: true,
     children: [
       {
         title: 'Dialog',
@@ -127,6 +131,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Extra Components',
     icon: 'message-circle-outline',
+    hidden: true,
     children: [
       {
         title: 'Calendar',
@@ -157,6 +162,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Maps',
     icon: 'map-outline',
+    hidden: true,
     children: [
       {
         title: 'Google Maps',
@@ -179,6 +185,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Charts',
     icon: 'pie-chart-outline',
+    hidden: true,
     children: [
       {
         title: 'Echarts',
@@ -197,6 +204,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Editors',
     icon: 'text-outline',
+    hidden: true,
     children: [
       {
         title: 'TinyMCE',
@@ -211,6 +219,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Tables & Data',
     icon: 'grid-outline',
+    hidden: true,
     children: [
       {
         title: 'Smart Table',
@@ -225,6 +234,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Miscellaneous',
     icon: 'shuffle-2-outline',
+    hidden: true,
     children: [
       {
         title: '404',
@@ -235,6 +245,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Auth',
     icon: 'lock-outline',
+    hidden: true,
     children: [
       {
         title: 'Login',
