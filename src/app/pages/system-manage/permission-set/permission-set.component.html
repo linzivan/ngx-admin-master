@@ -1,13 +1,11 @@
 
-<div class="container-fluid"  style="width: 1500px; text-align: left;">
+<div class="row">
 
-    <div style="width: 600px; display: inline-block; float: left;">
+    <div class="col-md-12" *ngIf="!isShowRoleList">
       <nb-card>
         <nb-card-header>
-
-
-
           权限分配
+          <button style="float: right" class="btn-primary" (click)="toggle()">添加</button>
         </nb-card-header>
 
         <nb-card-body>
@@ -18,10 +16,11 @@
     </div>
 
 
-    <div  style="width: 500px; display: inline-block; float: left; margin-left: 10px">
+    <div class="col-md-12" *ngIf="isShowRoleList">
       <nb-card>
         <nb-card-header>
           角色列表
+          <button style="float: right" class="btn-primary" (click)="toggle()">返回</button>
         </nb-card-header>
         <nb-card-body>
           <ng2-smart-table [settings]="role_list_settings" [source]="role_list_source" (deleteConfirm)="roleAddEvent($event)">

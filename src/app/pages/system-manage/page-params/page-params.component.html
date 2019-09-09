@@ -1,11 +1,6 @@
-  <!--<button disabled nbButton ghost>-->
-    <!--页面参数-->
-  <!--</button>-->
-  <!--<a  nbButton [status]="statuses[2]" ghost routerLink="/pages/system-manage/permission-set">-->
-              <!--权限配置-->
-  <!--</a>-->
-
-<nb-card>
+<div class="row">
+  <div class="col-md-10">
+    <nb-card>
       <nb-card-header>页面参数配置</nb-card-header>
       <nb-card-body>
         <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
@@ -58,3 +53,6 @@
         </form>
       </nb-card-body>
     </nb-card>
+
+  </div>
+</div>

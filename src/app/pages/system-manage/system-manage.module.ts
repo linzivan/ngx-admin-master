@@ -11,7 +11,7 @@ import {
   NbIconModule,
   NbInputModule,
   NbPopoverModule, NbRadioModule,
-  NbSearchModule, NbSelectModule,
+  NbSearchModule, NbSelectModule, NbTableModule, NbTabsetModule,
   NbTreeGridModule, NbUserModule,
 } from '@nebular/theme';
 import {ThemeModule} from '../../@theme/theme.module';
@@ -24,6 +24,7 @@ import { MenuConfigComponent } from './menu-config/menu-config.component';
 import { DialogAddmenuComponent } from './menu-config/dialog-addmenu/dialog-addmenu.component';
 import {PageListTableSetings} from './page-list/pageList-tableConfig';
 import {MenuTreeService} from './service/menuTree-service';
+import { DialogPageListComponent } from './menu-config/dialog-page-list/dialog-page-list.component';
 
 const COMPONENTS = [
   PageListComponent,
@@ -32,10 +33,12 @@ const COMPONENTS = [
   SystemManageComponent,
   MenuConfigComponent,
   DialogAddmenuComponent,
+  DialogPageListComponent,
 ];
 
 const ENTRY_COMPONENTS = [
   DialogAddmenuComponent,
+  DialogPageListComponent,
 ];
 
 const IMPORTS = [
@@ -45,6 +48,8 @@ const IMPORTS = [
     NbInputModule,
     NbPopoverModule,
     NbSearchModule,
+    NbTableModule,
+    NbTabsetModule,
     NbAlertModule,
     NbButtonModule,
     NbActionsModule,

@@ -1,30 +1,26 @@
-<div *ngIf="!showPageListFlag">
-      <div class="row">
+<div>
+      <div class="row" style="height: 25px">
         <div class="col-md-1">
           <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="open()"></nb-icon>
         </div>
         <div class="col-md-1">
-          <nb-icon title="链接" [icon]="evaIcons[132]" pack="eva" (click)="showPageListToggle()"></nb-icon>
+          <nb-icon title="链接" [icon]="evaIcons[132]" pack="eva" (click)="openPageList()"></nb-icon>
         </div>
         <div class="col-md-1">
           <nb-icon title="删除" [icon]="evaIcons[227]" pack="eva" (click)="deleteMenu()"></nb-icon>
         </div>
-        <div class="col-md-1 offset-2" >
-          <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="buttonDisabled">配置</button>
-        </div>
-        <div class="col-md-1 offset-1">
-          <button nbButton [size]="sizes[0]" *ngIf="selectedMenu" (click)="toggle()" [disabled]="!buttonDisabled">权限</button>
+        <div class="col-md-2 offset-1"  *ngIf="selectedMenu">
+          <button [ngClass]="{'btn-primary':buttonDisabled}" (click)="toggle()">配置</button>
+          <button [ngClass]="{'btn-primary':!buttonDisabled}" (click)="toggle1()">权限</button>
         </div>
 
       </div>
-
-
       <div class="row">
-        <div class="col-md-3">
+        <div style="width: 300px;">
           <nb-card>
             <nb-card-header>菜单项 <i *ngIf="selectedMenu" style="color: red">{{selectedMenu.name}}</i></nb-card-header>
             <nb-card-body>
-              <tree-root [nodes]="nodes"  (activate)="selected($event)" [(state)]="stats"></tree-root>
+              <tree-root [nodes]="nodes" (activate)="selected($event)" [(state)]="stats"></tree-root>
             </nb-card-body>
           </nb-card>
         </div>
@@ -33,11 +29,5 @@
           <ngx-permission-set [menuItem]="selectedMenu"  *ngIf="!buttonDisabled"></ngx-permission-set>
         </div>
       </div>
-</div>
-
-<div  *ngIf="selectedMenu && showPageListFlag">
-  <i>菜单列表</i>
-  <button nbButton [size]="sizes[0]" (click)="showPageListToggle()" style="float: right">返回</button>
-  <ngx-page-list (selectPage)="linkPage($event)" [menuItem]="selectedMenu"></ngx-page-list>
 </div>
 

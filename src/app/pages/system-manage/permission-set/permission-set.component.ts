@@ -16,6 +16,7 @@ export class PermissionSetComponent implements OnInit , OnChanges {
   current_page_roles = [];
   current_roles = [];
   evaIcons = [];
+  isShowRoleList = false;
   permission_source: LocalDataSource = new LocalDataSource();
   role_list_source: LocalDataSource = new LocalDataSource();
   permission_settings = {
@@ -28,6 +29,9 @@ export class PermissionSetComponent implements OnInit , OnChanges {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
+    },
+    pager: {
+      perPage: 7,
     },
     columns: {
       role: {
@@ -50,7 +54,9 @@ export class PermissionSetComponent implements OnInit , OnChanges {
       delete: true,
       add: false,
       edit: false,
-      position: 'right',
+    },
+    pager: {
+      perPage: 7,
     },
     delete: {
       deleteButtonContent: '<i class="nb-plus"></i>',
@@ -156,5 +162,8 @@ export class PermissionSetComponent implements OnInit , OnChanges {
     this.current_page_roles = page_roles;
     this.current_roles = role_list;
     this.refreshData();
+  }
+  toggle() {
+    this.isShowRoleList = !this.isShowRoleList;
   }
 }

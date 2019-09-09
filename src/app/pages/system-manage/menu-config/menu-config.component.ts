@@ -3,6 +3,7 @@ import {MenuListData} from "../../../@core/data/menu-list";
 import {NbComponentSize, NbComponentStatus, NbDialogService, NbIconLibraries} from "@nebular/theme";
 import {DialogAddmenuComponent} from "./dialog-addmenu/dialog-addmenu.component";
 import {MenuTreeService} from "../service/menuTree-service";
+import {DialogPageListComponent} from './dialog-page-list/dialog-page-list.component';
 
 @Component({
   selector: 'ngx-menu-config',
@@ -17,7 +18,6 @@ export class MenuConfigComponent implements OnInit {
   stats;        // Tree状态
   evaIcons; // 图标
   buttonDisabled = true; // 配置和权限按钮显示
-  showPageListFlag = false; // 是否显示页面列表
   constructor(iconsLibrary: NbIconLibraries,
               private menuServer: MenuListData,
               private dialogService: NbDialogService,
@@ -36,21 +36,28 @@ export class MenuConfigComponent implements OnInit {
     this.selectedMenu = event.node.data;
   }
   toggle() {
-    this.buttonDisabled = !this.buttonDisabled;
+    this.buttonDisabled = true;
+  }
+  toggle1() {
+    this.buttonDisabled = false;
   }
   open() {
     this.dialogService.open(DialogAddmenuComponent)
       .onClose.subscribe(name => {
     });
   }
-  showPageListToggle() {
-    if (this.selectedMenu) {
-      this.showPageListFlag = !this.showPageListFlag;
+  openPageList() {
+    if (!this.selectedMenu) {
+      window.alert('您还未选择菜单项！');
+      return;
     }
+    this.dialogService.open(DialogPageListComponent)
+      .onClose.subscribe( data => {
+        this.linkPage(data);
+    });
   }
   linkPage(menu) {
     if (menu.id) {
-      this.showPageListFlag = !this.showPageListFlag;
       (this.selectedMenu.children || (this.selectedMenu.children = [])).push(menu);
     }
   }
