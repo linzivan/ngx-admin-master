@@ -1,5 +1,5 @@
 <div>
-      <div class="row" style="height: 25px">
+      <div class="row" style="height: 25px" *ngIf="selectedMenu">
         <div class="col-md-1">
           <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="open()"></nb-icon>
         </div>
@@ -15,6 +15,7 @@
         </div>
 
       </div>
+      <div class="row" style="height: 25px" *ngIf="!selectedMenu"></div>
       <div class="row">
         <div style="width: 300px;">
           <nb-card>
