@@ -4,6 +4,7 @@ import {NbComponentSize, NbComponentStatus, NbDialogService, NbIconLibraries} fr
 import {DialogAddmenuComponent} from "./dialog-addmenu/dialog-addmenu.component";
 import {MenuTreeService} from "../service/menuTree-service";
 import {DialogPageListComponent} from './dialog-page-list/dialog-page-list.component';
+import {InsertMenuService} from "../service/insert-menu.service";
 
 @Component({
   selector: 'ngx-menu-config',
@@ -21,8 +22,8 @@ export class MenuConfigComponent implements OnInit {
   constructor(iconsLibrary: NbIconLibraries,
               private menuServer: MenuListData,
               private dialogService: NbDialogService,
-              private menuTreeService: MenuTreeService ) {
-    this.nodes = this.menuServer.getData();
+              private menuTreeService: MenuTreeService,
+              private insertMenuService: InsertMenuService) {
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
       .filter(icon => icon.indexOf('outline') === -1);
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
@@ -31,19 +32,33 @@ export class MenuConfigComponent implements OnInit {
     const current_menu = JSON.parse(localStorage.getItem('current_menu'));
   }
   ngOnInit() {
+    this.loadMenuTree();
   }
   selected(event) {
     this.selectedMenu = event.node.data;
   }
-  toggle() {
+  showConfig() {
     this.buttonDisabled = true;
   }
-  toggle1() {
+  showPermission() {
     this.buttonDisabled = false;
   }
-  open() {
+  createMenu() {
     this.dialogService.open(DialogAddmenuComponent)
       .onClose.subscribe(name => {
+        if (name) {
+          // 如果没选中则为根Tree，没有父节点
+          const parentid = this.selectedMenu ? this.selectedMenu.id : null;
+          const menu = {
+            'name': name,
+            'parentid': parentid
+          };
+          this.insertMenuService.insertMenu(menu).subscribe(result => {
+            if (result['result'] === 1) {
+              this.loadMenuTree();
+            }
+          });
+        }
     });
   }
   openPageList() {
@@ -80,7 +95,7 @@ export class MenuConfigComponent implements OnInit {
   loadMenuTree() {
     this.menuTreeService.getMenuTree()
       .subscribe((data) => {
-        // TODO
+        this.nodes = data;
       });
   }
 }

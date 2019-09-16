@@ -24,6 +24,7 @@ import { MenuConfigComponent } from './menu-config/menu-config.component';
 import { DialogAddmenuComponent } from './menu-config/dialog-addmenu/dialog-addmenu.component';
 import {PageListTableSetings} from './page-list/pageList-tableConfig';
 import {MenuTreeService} from './service/menuTree-service';
+import {InsertMenuService} from "./service/insert-menu.service";
 import { DialogPageListComponent } from './menu-config/dialog-page-list/dialog-page-list.component';
 
 const COMPONENTS = [
@@ -69,7 +70,8 @@ const IMPORTS = [
 
 const PROVIDERS = [
   PageListTableSetings,
-  MenuTreeService
+  MenuTreeService,
+  InsertMenuService
 ];
 
 @NgModule({

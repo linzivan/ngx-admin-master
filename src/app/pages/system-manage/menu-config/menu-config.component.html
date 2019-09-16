@@ -1,7 +1,7 @@
 <div>
       <div class="row" style="height: 25px" *ngIf="selectedMenu">
         <div class="col-md-1">
-          <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="open()"></nb-icon>
+          <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="createMenu()"></nb-icon>
         </div>
         <div class="col-md-1">
           <nb-icon title="链接" [icon]="evaIcons[132]" pack="eva" (click)="openPageList()"></nb-icon>
@@ -10,12 +10,16 @@
           <nb-icon title="删除" [icon]="evaIcons[227]" pack="eva" (click)="deleteMenu()"></nb-icon>
         </div>
         <div class="col-md-2 offset-1"  *ngIf="selectedMenu">
-          <button [ngClass]="{'btn-primary':buttonDisabled}" (click)="toggle()">配置</button>
-          <button [ngClass]="{'btn-primary':!buttonDisabled}" (click)="toggle1()">权限</button>
+          <button [ngClass]="{'btn-primary':buttonDisabled}" (click)="showConfig()">配置</button>
+          <button [ngClass]="{'btn-primary':!buttonDisabled}" (click)="showPermission()">权限</button>
         </div>
 
       </div>
-      <div class="row" style="height: 25px" *ngIf="!selectedMenu"></div>
+      <div class="row" style="height: 25px" *ngIf="!selectedMenu">
+        <div class="col-md-1">
+          <nb-icon title="添加" [icon]="evaIcons[183]" pack="eva" (click)="createMenu()"></nb-icon>
+        </div>
+      </div>
       <div class="row">
         <div style="width: 300px;">
           <nb-card>
