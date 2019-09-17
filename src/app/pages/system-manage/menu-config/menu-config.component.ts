@@ -3,6 +3,7 @@ import {MenuListData} from "../../../@core/data/menu-list";
 import {NbComponentSize, NbComponentStatus, NbDialogService, NbIconLibraries} from "@nebular/theme";
 import {DialogAddmenuComponent} from "./dialog-addmenu/dialog-addmenu.component";
 import {MenuTreeService} from "../service/menuTree-service";
+import {DeleteMenuService} from "../service/delete-menu.service";
 import {DialogPageListComponent} from './dialog-page-list/dialog-page-list.component';
 import {InsertMenuService} from "../service/insert-menu.service";
 
@@ -23,7 +24,8 @@ export class MenuConfigComponent implements OnInit {
               private menuServer: MenuListData,
               private dialogService: NbDialogService,
               private menuTreeService: MenuTreeService,
-              private insertMenuService: InsertMenuService) {
+              private insertMenuService: InsertMenuService,
+              private deleteMenuService: DeleteMenuService ) {
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
       .filter(icon => icon.indexOf('outline') === -1);
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
@@ -81,14 +83,16 @@ export class MenuConfigComponent implements OnInit {
       window.alert('您还未选择要删除的菜单项！');
       return;
     }
-    if (!this.selectedMenu.parentid && this.selectedMenu.children) {
-      // 如果是父级菜单，并且含有子菜单，不能删除。
+    if (this.selectedMenu.children) {
       window.alert('该父级菜单下含有子菜单，不能删除！');
       return ;
     }
-    // TODO: HTTPAPI 删除子 Tree
     if (window.confirm(`确定要删除${this.selectedMenu.name}吗?`)) {
-      this.nodes = this.menuServer.getData1();
+      this.deleteMenuService.deleteMenu(this.selectedMenu).subscribe(data => {
+        if (data['result']) {
+          this.loadMenuTree();
+        }
+      });
       delete this.selectedMenu;
     }
   }
