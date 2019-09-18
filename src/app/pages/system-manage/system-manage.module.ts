@@ -27,6 +27,9 @@ import {MenuTreeService} from './service/menuTree-service';
 import {InsertMenuService} from "./service/insert-menu.service";
 import {DeleteMenuService} from "./service/delete-menu.service";
 import { DialogPageListComponent } from './menu-config/dialog-page-list/dialog-page-list.component';
+import {UpdateMenuService} from './service/update-menu.service';
+import {GetMenuRoleService} from './service/get-menu-role.service';
+import {GetAllRolesService} from './service/get-all-roles.service';
 
 const COMPONENTS = [
   PageListComponent,
@@ -74,6 +77,9 @@ const PROVIDERS = [
   MenuTreeService,
   InsertMenuService,
   DeleteMenuService,
+  UpdateMenuService,
+  GetMenuRoleService,
+  GetAllRolesService,
 ];
 
 @NgModule({

@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {FormBuilder} from '@angular/forms';
 import {NbComponentStatus, NbIconLibraries} from "@nebular/theme";
 import {Router} from "@angular/router";
+import {UpdateMenuService} from "../service/update-menu.service";
 
 @Component({
   selector: 'ngx-page-params',
@@ -16,6 +17,7 @@ export class PageParamsComponent implements OnInit, OnChanges {
   statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
   constructor(private formBuilder: FormBuilder,
               iconsLibrary: NbIconLibraries,
+              private updateMenuService: UpdateMenuService,
               private route: Router) {
     /*
     * *Nb图标
@@ -26,7 +28,6 @@ export class PageParamsComponent implements OnInit, OnChanges {
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('far', { packClass: 'far', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
-    const current_menu = JSON.parse(localStorage.getItem('current_menu'));
     /*
     * *{
       name: '',
@@ -48,10 +49,8 @@ export class PageParamsComponent implements OnInit, OnChanges {
   }
   onSubmit(customerData) {
     // Process checkout data here
-    console.warn('Your order has been submitted', customerData);
-    // this.items = this.cartService.clearCart();
-    // this.checkoutForm.reset();
-    // TODO: 提交数据
-    // this.route.navigate(['/pages/system-manage/page-config']);
+    this.updateMenuService.updateMenu(customerData).subscribe(result => {
+      // 可加判断
+    });
   }
 }
