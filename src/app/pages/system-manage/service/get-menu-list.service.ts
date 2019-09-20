@@ -5,13 +5,13 @@ import {HttpConfigService} from "../../config/httpConfig-service";
 @Injectable({
   providedIn: 'root'
 })
-export class GetAllRolesService {
+export class GetMenuListService {
 
-  menuTreeUrl = this.config.getPrefix() + '/get_all_roles';
+  menuTreeUrl = this.config.getPrefix() + '/get_menu_item';
   constructor (private http: HttpClient,
                private config: HttpConfigService, ) {
   }
-  getAllRoles() {
-    return this.http.get(this.menuTreeUrl);
+  getMenuList() {
+    return this.http.get<[]>(this.menuTreeUrl);
   }
 }

@@ -1,5 +1,6 @@
 <div class="container">
   <!--<button nbButton [size]="sizes[0]" (click)="showPageListToggle()" style="float: right">返回</button>-->
-  <div class="col-md-6"></div>
-  <ngx-page-list (selectPage)="linkPage($event)" [menuItem]="selectedMenu"></ngx-page-list>
+  <div class="row" style="height:700px;overflow:auto;">
+      <ngx-page-list (selectPage)="linkPage($event)" [menuItem]="selectedMenu"></ngx-page-list>
+  </div>
 </div>

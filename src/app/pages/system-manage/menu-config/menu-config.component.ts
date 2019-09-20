@@ -6,6 +6,7 @@ import {MenuTreeService} from "../service/menuTree-service";
 import {DeleteMenuService} from "../service/delete-menu.service";
 import {DialogPageListComponent} from './dialog-page-list/dialog-page-list.component';
 import {InsertMenuService} from "../service/insert-menu.service";
+import {LinkMenuService} from "../service/link-menu.service";
 
 @Component({
   selector: 'ngx-menu-config',
@@ -25,7 +26,8 @@ export class MenuConfigComponent implements OnInit {
               private dialogService: NbDialogService,
               private menuTreeService: MenuTreeService,
               private insertMenuService: InsertMenuService,
-              private deleteMenuService: DeleteMenuService ) {
+              private deleteMenuService: DeleteMenuService,
+              private linkMenuService: LinkMenuService) {
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
       .filter(icon => icon.indexOf('outline') === -1);
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
@@ -75,7 +77,16 @@ export class MenuConfigComponent implements OnInit {
   }
   linkPage(menu) {
     if (menu.id) {
-      (this.selectedMenu.children || (this.selectedMenu.children = [])).push(menu);
+      const menuid_parentid = {
+        parentid: this.selectedMenu.id,
+        id: menu.id
+      };
+      this.linkMenuService.linkMenu(menuid_parentid).subscribe(result => {
+        if (result['result']) {
+          this.loadMenuTree();
+        }
+      });
+    // (this.selectedMenu.children || (this.selectedMenu.children = [])).push(menu);
     }
   }
   deleteMenu () {

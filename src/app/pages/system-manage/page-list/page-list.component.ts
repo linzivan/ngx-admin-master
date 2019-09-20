@@ -4,6 +4,8 @@ import {PageListData} from '../../../@core/data/page-list';
 import {Router} from '@angular/router';
 import {NbComponentStatus} from "@nebular/theme";
 import {PageListTableSetings} from "./pageList-tableConfig";
+import {GetMenuListService} from "../service/get-menu-list.service";
+import {removeSummaryDuplicates} from "@angular/compiler";
 
 @Component({
   selector: 'ngx-page-list',
@@ -15,6 +17,7 @@ export class PageListComponent implements OnInit, OnChanges {
   @Input() menuItem; // 父级别菜单
   @Output() selectPage = new EventEmitter<any>(); // 选中的页面
   ngOnInit() {
+    this.loadMenuList();
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.menuItem = changes.menuItem.currentValue;
@@ -25,13 +28,17 @@ export class PageListComponent implements OnInit, OnChanges {
 
   constructor(private service: PageListData,
               private route: Router,
-              private tbSettings: PageListTableSetings) {
-    const data = this.service.getData();
-    this.source.load(data);
+              private tbSettings: PageListTableSetings,
+              private getMenuListService: GetMenuListService) {
   }
-
+  loadMenuList() {
+    this.getMenuListService.getMenuList().subscribe(data => {
+      if (data) {
+        this.source.load(data);
+      }
+    });
+  }
   onDeleteConfirm(event): void {
-    // TODO: HTTPAPI接口 更新成功后发消息给父组件
     this.selectPage.emit(event.data);
   }
 }

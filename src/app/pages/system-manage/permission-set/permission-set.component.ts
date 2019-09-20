@@ -4,6 +4,10 @@ import {RoleData} from "../../../@core/data/role";
 import {RoleListData} from "../../../@core/data/role_list";
 import {NbComponentStatus, NbIconLibraries} from "@nebular/theme";
 import {Router} from "@angular/router";
+import {GetAllRolesService} from '../service/get-all-roles.service';
+import {GetMenuRoleService} from "../service/get-menu-role.service";
+import {DeleteMenuRoleService} from "../service/delete-menu-role.service";
+import {InsertMenuRoleService} from "../service/insert-menu-role.service";
 
 @Component({
   selector: 'ngx-permission-set',
@@ -76,7 +80,10 @@ export class PermissionSetComponent implements OnInit , OnChanges {
   constructor(private RoleDataService: RoleData,
               private RoleListDataService: RoleListData,
               iconsLibrary: NbIconLibraries,
-              private route: Router) {
+              private getAllRolesService: GetAllRolesService,
+              private getMenuRoleService: GetMenuRoleService,
+              private deleteMenuRoleService: DeleteMenuRoleService,
+              private insertMenuRoleService: InsertMenuRoleService) {
 
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())
       .filter(icon => icon.indexOf('outline') === -1);
@@ -87,46 +94,32 @@ export class PermissionSetComponent implements OnInit , OnChanges {
 
   permissionDeleteEvent(event): void {
     // 页面权限删除事件
-    // TODO 与后台交互
     if (window.confirm('您确定要删除吗?')) {
-      event.confirm.resolve();
-      this.page_roles_remove(event.data);
-      this.role_list_append(event.data);
-      this.refreshData();
+      const menu_role = {
+        menuid: this.menuItem.id,
+        roleid: event.data.roleid,
+      };
+      this.deleteMenuRoleService.deleteMenuRole(menu_role).subscribe(result => {
+        if (result['result']) {
+          event.confirm.resolve();
+          this.loadData();
+        }
+      });
     } else {
       event.confirm.reject();
     }
   }
   roleAddEvent(event) {
     // 页面权限添加事件
-    // TODO 与后台交互
-    this.role_list_remove(event.data);
-    this.page_roles_append(event.data);
-    this.refreshData();
-  }
-  role_list_append(role) {
-    this.current_roles.push(role);
-  }
-  role_list_remove(role) {
-    let temp_role_list = [];
-    for (let r of this.current_roles) {
-      if (r.role !== role.role) {
-        temp_role_list.push(r);
-      }
-    }
-    this.current_roles = temp_role_list;
-  }
-  page_roles_append(role) {
-    this.current_page_roles.push(role);
-  }
-  page_roles_remove(role) {
-    let temp_page_roles = [];
-    for (let r of this.current_page_roles) {
-      if (r.role !== role.role) {
-        temp_page_roles.push(r);
-      }
-    }
-    this.current_page_roles = temp_page_roles;
+    const menu_role = {
+        menuid: this.menuItem.id,
+        roleid: event.data.id,
+      };
+    this.insertMenuRoleService.insertMenuRole(menu_role).subscribe(result => {
+        if (result['result']) {
+          this.loadData();
+        }
+      });
   }
   ngOnInit() {
     this.loadData();
@@ -141,10 +134,14 @@ export class PermissionSetComponent implements OnInit , OnChanges {
     this.role_list_source.load(this.current_roles);
   }
   loadData() {
-    const current_menu_id = this.menuItem.id;
-    // TODO: 通过menuId去查 该menu下的role
-    const page_roles = this.RoleDataService.getData(current_menu_id); // 该页面目前的权限
-    const all_role_list = this.RoleListDataService.getData(); // 所有权限
+    this.getAllRolesService.getAllRoles().subscribe(all_role_list => {
+          this.getMenuRoleService.getMenuRole(this.menuItem).subscribe(page_roles => {
+                this.processPageRole(all_role_list, page_roles);
+            });
+      });
+  }
+  processPageRole(all_role_list, page_roles) {
+     // 该页面目前的权限
     let role_list = [];
     // 首先去除已选择的员工role
     for (let role of all_role_list) {

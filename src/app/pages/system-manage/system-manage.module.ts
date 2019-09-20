@@ -30,6 +30,10 @@ import { DialogPageListComponent } from './menu-config/dialog-page-list/dialog-p
 import {UpdateMenuService} from './service/update-menu.service';
 import {GetMenuRoleService} from './service/get-menu-role.service';
 import {GetAllRolesService} from './service/get-all-roles.service';
+import {DeleteMenuRoleService} from "./service/delete-menu-role.service";
+import {InsertMenuRoleService} from './service/insert-menu-role.service';
+import {GetMenuListService} from "./service/get-menu-list.service";
+import {LinkMenuService} from "./service/link-menu.service";
 
 const COMPONENTS = [
   PageListComponent,
@@ -80,6 +84,10 @@ const PROVIDERS = [
   UpdateMenuService,
   GetMenuRoleService,
   GetAllRolesService,
+  DeleteMenuRoleService,
+  InsertMenuRoleService,
+  GetMenuListService,
+  LinkMenuService,
 ];
 
 @NgModule({

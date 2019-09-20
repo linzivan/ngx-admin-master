@@ -8,7 +8,7 @@ export class PageListTableSetings {
       position: 'right',
     },
     pager: {
-      perPage: 15,
+      perPage: 6,
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
