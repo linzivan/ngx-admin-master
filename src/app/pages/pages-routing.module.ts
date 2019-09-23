@@ -24,6 +24,10 @@ const routes: Routes = [{
         .then(m => m.SystemManageModule),
     },
     {
+      path: 'plan-manage',
+      loadChildren: () => import('./plan-manage/plan-manage.module').then(m => m.PlanManageModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

@@ -59,6 +59,8 @@ import {RoleListData} from "./data/role_list";
 import {RoleListDataService} from "./mock/role_list.service";
 import {MenuListData} from "./data/menu-list";
 import {MenuListService} from "./mock/menu-list.service";
+import {PlanSchedule} from "./data/plan-schedule";
+import {PlanScheduleService} from './mock/plan-schedule.service';
 
 const socialLinks = [
   {
@@ -89,6 +91,7 @@ const DATA_SERVICES = [
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
   { provide: ProfitChartData, useClass: ProfitChartService },
+  { provide: PlanSchedule, useClass: PlanScheduleService },
   { provide: TrafficListData, useClass: TrafficListService },
   { provide: EarningData, useClass: EarningService },
   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService },

@@ -27,6 +27,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: '计划管理',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: '计划排产',
+        link: '/pages/plan-manage/plan-schedule',
+      }
+    ],
+  },
+  {
     title: 'Layout',
     icon: 'layout-outline',
     hidden: true,
