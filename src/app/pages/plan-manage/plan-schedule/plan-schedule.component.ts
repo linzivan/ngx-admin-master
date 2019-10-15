@@ -19,6 +19,7 @@ export class PlanScheduleComponent implements OnInit {
   }
   settings = {
     selectMode: 'multi',
+    defaultStyle: false,
     actions: {
       columnTitle: '操作',
       delete: false,
@@ -40,6 +41,7 @@ export class PlanScheduleComponent implements OnInit {
       wipordertype: {
         title: '工单类型',
         type: 'string',
+        filter: false,
       },
       orderindex: {
         title: '工单顺序',
@@ -48,18 +50,22 @@ export class PlanScheduleComponent implements OnInit {
       productid: {
         title: '物料编号',
         type: 'string',
+        filter: false,
       },
       productdesc: {
         title: '物料描述',
         type: 'string',
+        filter: false,
       },
       lastupdateon: {
         title: '操作人',
         type: 'string',
+        filter: false,
       },
       lastupdateby: {
         title: '操作人',
         type: 'string',
+        filter: false,
       },
     },
   };
@@ -68,5 +74,6 @@ export class PlanScheduleComponent implements OnInit {
   }
   onUserRowSelect(event) {
     this.selectedRows = event.selected;
+    console.warn(this.selectedRows);
   }
 }

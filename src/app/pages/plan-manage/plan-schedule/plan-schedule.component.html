@@ -1,11 +1,10 @@
-<div class="container-fluid">
+<div class="main-content with-sidebar">
 
   <nb-card>
     <nb-card-header>计划排产</nb-card-header>
 
     <nb-card-body>
       <ng2-smart-table [settings]="settings" [source]="plan_schedule_data" (userRowSelect)="onUserRowSelect($event)">
-
       </ng2-smart-table>
     </nb-card-body>
   </nb-card>

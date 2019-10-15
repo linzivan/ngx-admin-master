@@ -3,6 +3,11 @@
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
 
+@import 'main';
+@import "light";
+@import "normalize";
+
+
 $nb-themes: nb-register-theme((
   layout-padding-top: 2.25rem,
 
